@@ -12,17 +12,20 @@ type CurrencyExchangePropsType = {
     changeCurrentCurrency: (e: React.MouseEvent<HTMLLIElement>) => void;
 };
 
-const CurrencyExchange: React.FC<CurrencyExchangePropsType> = ({
-                                                                                  currenciesName,
-                                                                                  currentCurrency,
-                                                                                  currencyRate,
-                                                                                  isBuying,
-                                                                                  amountOfBYN,
-                                                                                  amountOfCurrency,
-                                                                                  changeCurrencyField,
-                                                                                  changeAction,
-                                                                                  changeCurrentCurrency,
-                                                                              }) => {
+const CurrencyExchange: React.FC<CurrencyExchangePropsType> = (props) => {
+
+    let {
+        currenciesName,
+        currentCurrency,
+        currencyRate,
+        isBuying,
+        amountOfBYN,
+        amountOfCurrency,
+        changeCurrencyField,
+        changeAction,
+        changeCurrentCurrency,
+    } = props
+
     const viewCurrency = isBuying ? (
         <React.Fragment>
             <label>
@@ -68,12 +71,12 @@ const CurrencyExchange: React.FC<CurrencyExchangePropsType> = ({
                 </ul>
             </div>
             <div className="currency-action">
-        <span className={isBuying ? 'active' : ''} data-action="buy" onClick={changeAction}>
-          Buy
-        </span>
+                <span className={isBuying ? 'active' : ''} data-action="buy" onClick={changeAction}>
+                    Buy
+                </span>
                 <span className={isBuying ? '' : 'active'} data-action="sell" onClick={changeAction}>
-          Sell
-        </span>
+                    Sell
+                </span>
             </div>
             <div className="fields">
                 <p>Currency rate: {currencyRate}</p>
