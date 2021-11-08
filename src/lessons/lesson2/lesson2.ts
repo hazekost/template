@@ -24,6 +24,12 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
+const sum = (num1: number) => {
+    return (num2: number) => {
+        return num1 + num2
+    }
+}
+
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
@@ -33,6 +39,14 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+const makeCounter = () => {
+    let count = 0
+    return () => {
+        count += 1
+        return count
+    }
+}
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -40,6 +54,24 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+const makeCounter2 = (num: number) => {
+    return {
+        state: num,
+        increase() {
+            this.state += 1
+        },
+        decrease() {
+            this.state -= 1
+        },
+        reset() {
+            this.state = 0
+        },
+        set(num: number) {
+            this.state = num
+        },
+    }
+}
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -51,13 +83,63 @@ console.log('lesson 2');
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 
+const superSum = (num: number) => {
+    if (num === 0) return 0;
+    if (num === 1) return (num1: number) => num1;
+    let res = 0;
+    let arr: Array<number> = [];
+    const helper = (...nums: Array<number>) => {
+        arr = [...arr, ...nums]
+        if (arr.length >= num) {
+            arr.length = num
+            // for (let i = 0; i < arr.length; i++) {
+            //     res += arr[i]
+            // }
+            res = arr.reduce((acc, n) => acc + n, 0)
+            return res
+        } else {
+            return helper
+        }
+    }
+    return helper
+}
+
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 
+const sumToRecursion = (n: number): number => {
+    if (n === 1) return n
+    return n + sumToRecursion(n - 1)
+}
+const sumToCicle = (n: number) => {
+    let num = n
+    let res = 0
+    while (num !== 0) {
+        res += num
+        num -= 1
+    }
+    return res
+}
+
+const recFactorial = (n: number): number => {
+    if (n === 1) return 1
+    return n * recFactorial(n - 1)
+}
+
+const factorial = (n: number) => {
+    let acc = 1
+    let num = n
+    while (num !== 0) {
+        acc *= num
+        num -= 1
+    }
+    return acc
+}
+
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => {};
+export default () => { };
