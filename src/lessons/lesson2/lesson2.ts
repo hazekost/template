@@ -30,6 +30,8 @@ const sum = (num1: number) => {
     }
 }
 
+console.log(sum(3)(6));
+
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
@@ -46,6 +48,12 @@ const makeCounter = () => {
         return count
     }
 }
+const counter = makeCounter()
+console.log(counter());
+console.log(counter());
+const counter2 = makeCounter()
+console.log(counter2());
+console.log(counter());
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
@@ -73,6 +81,8 @@ const makeCounter2 = (num: number) => {
     }
 }
 
+console.log(makeCounter2(10));
+
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
 // и что бы корректно работали следующие вызовы:
@@ -84,9 +94,8 @@ const makeCounter2 = (num: number) => {
 // 6) superSum(3)(2,5)(3,9) //10
 
 const superSum = (num: number) => {
-    if (num === 0) return 0;
+    if (num <= 0) return 0;
     if (num === 1) return (num1: number) => num1;
-    let res = 0;
     let arr: Array<number> = [];
     const helper = (...nums: Array<number>) => {
         arr = [...arr, ...nums]
@@ -95,14 +104,25 @@ const superSum = (num: number) => {
             // for (let i = 0; i < arr.length; i++) {
             //     res += arr[i]
             // }
-            res = arr.reduce((acc, n) => acc + n, 0)
-            return res
+            return arr.reduce((acc, n) => acc + n, 0)
         } else {
             return helper
         }
     }
     return helper
 }
+
+console.log(superSum(0));
+//@ts-ignore
+console.log(superSum(3)(2)(5)(3));
+//@ts-ignore
+console.log(superSum(3)(2)(5, 3));
+//@ts-ignore
+console.log(superSum(3)(2, 5, 3));
+//@ts-ignore
+console.log(superSum(3)(2, 5)(3));
+//@ts-ignore
+console.log(superSum(3)(2, 5)(3, 9));
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
@@ -113,6 +133,10 @@ const sumToRecursion = (n: number): number => {
     if (n === 1) return n
     return n + sumToRecursion(n - 1)
 }
+
+console.log(sumToRecursion(5));
+
+
 const sumToCicle = (n: number) => {
     let num = n
     let res = 0
@@ -123,10 +147,14 @@ const sumToCicle = (n: number) => {
     return res
 }
 
+console.log(sumToCicle(5));
+
 const recFactorial = (n: number): number => {
     if (n === 1) return 1
     return n * recFactorial(n - 1)
 }
+
+console.log(recFactorial(5));
 
 const factorial = (n: number) => {
     let acc = 1
@@ -138,8 +166,10 @@ const factorial = (n: number) => {
     return acc
 }
 
+console.log(factorial(5));
+
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => { };
+export const fc = () => { };
